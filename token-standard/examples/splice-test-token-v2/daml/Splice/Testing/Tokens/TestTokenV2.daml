@@ -16,6 +16,7 @@ module Splice.Testing.Tokens.TestTokenV2 (
   module Splice.Testing.Tokens.TestTokenV2.Holding,
   module Splice.Testing.Tokens.TestTokenV2.Allocation,
   module Splice.Testing.Tokens.TestTokenV2.Transfer,
+  module Splice.Testing.Tokens.TestTokenV2.ConditionalLock,
 ) where
 
 import DA.Assert
@@ -31,11 +32,13 @@ import Splice.Api.Token.AllocationV2 qualified as V2
 import Splice.Api.Token.AllocationInstructionV2 qualified as V2
 import Splice.Api.Token.TransferInstructionV2 qualified as V2
 import Splice.Api.Token.TransferEventsV2 as TransferEventsV2
+import Splice.Api.Token.ConditionalLockV1 qualified as CL
 import Splice.Testing.Tokens.TestTokenV2.AccountConfig
 import Splice.Testing.Tokens.TestTokenV2.Util
 import Splice.Testing.Tokens.TestTokenV2.Allocation
 import Splice.Testing.Tokens.TestTokenV2.Holding
 import Splice.Testing.Tokens.TestTokenV2.Transfer
+import Splice.Testing.Tokens.TestTokenV2.ConditionalLock
 import Splice.TokenStandard.Utils
 
 
@@ -70,6 +73,17 @@ template TokenRules with
         meta = emptyMetadata
 
       eventLog_holdingsChangeImpl = eventLog_holdingsChangeDefaultImpl admin
+
+    interface instance CL.ConditionalLockFactory for TokenRules where
+      view = CL.ConditionalLockFactoryView with
+        admin
+        meta = factoryMeta
+
+      conditionalLockFactory_lockExtraObservers = token_conditionalLockFactory_lockExtraObservers
+      conditionalLockFactory_publicFetchImpl = publicFetchDefaultImpl this
+      conditionalLockFactory_lockImpl self arg =
+        token_conditionalLockFactory_lockImpl admin (coerceInterfaceContractId self) self arg
+
 
     interface instance V2.SettlementFactory for TokenRules where
       view = V2.SettlementFactoryView with

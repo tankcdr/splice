@@ -21,6 +21,7 @@ data-dependencies:
 - ../splice-api-token-allocation-request-v2/.daml/dist/splice-api-token-allocation-request-v2-current.dar
 - ../splice-api-token-transfer-instruction-v1/.daml/dist/splice-api-token-transfer-instruction-v1-current.dar
 - ../splice-api-token-transfer-instruction-v2/.daml/dist/splice-api-token-transfer-instruction-v2-current.dar
+- ../splice-api-token-conditional-lock-v1/.daml/dist/splice-api-token-conditional-lock-v1-current.dar
 
 build-options:
   - --explicit-serializable=yes

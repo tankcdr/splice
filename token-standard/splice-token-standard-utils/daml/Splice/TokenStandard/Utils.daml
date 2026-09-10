@@ -234,6 +234,42 @@ module Splice.TokenStandard.Utils (
   transferFactoryV2_publicAsset_transferExtraObserversDefaultImpl,
   transferFactoryV2_privateAsset_transferExtraObserversDefaultImpl,
 
+  -- * Conditional lock workflows
+  emptyWitness,
+  digestHexLength,
+  isLowercaseHex,
+  isHexDigest,
+  isHexPreimage,
+  hashPreimage,
+  guardDepth,
+  guardSatisfied,
+  isWellFormedGuard,
+  isWellFormedOutcome,
+  isWellFormedRule,
+  isWellFormedTerms,
+  outcomeReceivers,
+  termsReceivers,
+  termsEnactors,
+  termsGuardParties,
+  namedPartiesOf,
+  ownerPartiesOf,
+  requiredReceiverParties,
+  legsSum,
+  legsPositive,
+  resolveOutcomeLegs,
+  remainingAfterLegs,
+  lockContextKey,
+  lockContextFromMeta,
+  ruleIdMetaKey,
+  maxRulesMetaKey,
+  maxLegsMetaKey,
+  maxGuardDepthMetaKey,
+  maxDurationMetaKey,
+  minDurationMetaKey,
+  defaultMaxRules,
+  defaultMaxLegs,
+  defaultMaxGuardDepth,
+
 ) where
 
 
@@ -242,3 +278,4 @@ import Splice.TokenStandard.Utils.Internal.Choices
 import Splice.TokenStandard.Utils.Internal.Events
 import Splice.TokenStandard.Utils.Internal.Transfers
 import Splice.TokenStandard.Utils.Internal.Allocations
+import Splice.TokenStandard.Utils.Internal.ConditionalLocks
